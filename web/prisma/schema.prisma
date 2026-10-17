@@ -1,0 +1,45 @@
+// FairBill Prisma Schema
+// Never store uploaded files or raw OCR bill text. Only structured audit results are persisted.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AuditStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model Audit {
+  id                      String      @id @default(cuid())
+  userId                  String
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+  providerName            String?
+  totalBilled             Decimal     @db.Decimal(10, 2)
+  totalPossibleOvercharge Decimal     @db.Decimal(10, 2)
+  status                  AuditStatus @default(COMPLETED)
+  items                   AuditItem[]
+
+  @@index([userId])
+}
+
+model AuditItem {
+  id                 String   @id @default(cuid())
+  auditId            String
+  audit              Audit    @relation(fields: [auditId], references: [id], onDelete: Cascade)
+  cptCode            String?
+  description        String
+  billedAmount       Decimal  @db.Decimal(10, 2)
+  benchmarkAmount    Decimal? @db.Decimal(10, 2)
+  possibleOvercharge Decimal? @db.Decimal(10, 2)
+  explanation        String?
+  createdAt          DateTime @default(now())
+
+  @@index([auditId])
+}
