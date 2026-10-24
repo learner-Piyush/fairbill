@@ -1,168 +1,281 @@
-import Link from "next/link";
+"use client";
 
-interface SampleItem {
+import { useState } from "react";
+import Link from "next/link";
+import sampleAuditFixture from "@/fixtures/sample-audit.json";
+import { AuditSummaryCard } from "@/components/AuditSummaryCard";
+import { LineItemRow, AuditItemData } from "@/components/LineItemRow";
+import { EditItemModal } from "@/components/EditItemModal";
+import { ProgressSteps } from "@/components/ProgressSteps";
+
+interface AuditState {
   id: string;
-  cptCode: string;
-  description: string;
-  billedAmount: number;
-  benchmarkAmount: number;
-  possibleOvercharge: number;
-  explanation: string;
+  providerName: string;
+  invoiceNumber: string;
+  date: string;
+  patientName: string;
+  ipNumber: string;
+  admissionType: string;
+  totalBilled: number;
+  totalPossibleOvercharge: number;
+  benchmarkCeiling: number;
+  status: string;
+  disclaimer: string;
+  categories: { id: string; name: string; count: number; amount: number; badgeClass?: string }[];
+  items: AuditItemData[];
 }
 
-const sampleItems: SampleItem[] = [
-  {
-    id: "item-1",
-    cptCode: "99285",
-    description: "Emergency Dept Visit - High Severity",
-    billedAmount: 950.0,
-    benchmarkAmount: 450.0,
-    possibleOvercharge: 500.0,
-    explanation: "Exceeds estimated 80th percentile regional commercial benchmark for CPT 99285.",
-  },
-  {
-    id: "item-2",
-    cptCode: "80053",
-    description: "Comprehensive Metabolic Panel",
-    billedAmount: 275.0,
-    benchmarkAmount: 125.0,
-    possibleOvercharge: 150.0,
-    explanation: "Exceeds standard clinical laboratory fee schedule for regional facilities.",
-  },
-  {
-    id: "item-3",
-    cptCode: "71046",
-    description: "Chest X-Ray 2 Views",
-    billedAmount: 200.0,
-    benchmarkAmount: 200.0,
-    possibleOvercharge: 0.0,
-    explanation: "Charge aligns with regional benchmark standard.",
-  },
-];
-
 export default function AuditPage() {
-  const totalBilled = sampleItems.reduce((acc, item) => acc + item.billedAmount, 0);
-  const totalPossibleOvercharge = sampleItems.reduce(
-    (acc, item) => acc + item.possibleOvercharge,
+  const [auditData, setAuditData] = useState<AuditState>(
+    sampleAuditFixture as unknown as AuditState
+  );
+  const [filter, setFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [editingItem, setEditingItem] = useState<AuditItemData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showProcessing, setShowProcessing] = useState(false);
+
+  // Recalculate summary metrics dynamically if items are edited
+  const items = auditData.items;
+  const totalBilled = items.reduce((acc, it) => acc + it.billedAmount, 0);
+  const totalPossibleOvercharge = items.reduce(
+    (acc, it) => acc + (it.possibleOvercharge ?? 0),
+    0
+  );
+  const benchmarkCeiling = items.reduce(
+    (acc, it) => acc + (it.benchmarkAmount ?? 0),
     0
   );
 
+  const filteredItems = items.filter((item) => {
+    const matchesFilter =
+      filter === "all"
+        ? true
+        : filter === "high"
+        ? item.status === "HIGH"
+        : filter === "duplicate"
+        ? item.status === "DUPLICATE"
+        : filter === "review"
+        ? item.status === "REVIEW"
+        : filter === "fair"
+        ? item.status === "FAIR"
+        : true;
+
+    const matchesSearch =
+      searchQuery === ""
+        ? true
+        : item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (item.cptCode &&
+            item.cptCode.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    return matchesFilter && matchesSearch;
+  });
+
+  const handleEditClick = (item: AuditItemData) => {
+    setEditingItem(item);
+    setIsModalOpen(true);
+  };
+
+  const handleSaveItem = (updated: AuditItemData) => {
+    const updatedItems = items.map((it) => (it.id === updated.id ? updated : it));
+    setAuditData({
+      ...auditData,
+      items: updatedItems,
+      totalBilled: updatedItems.reduce((acc, it) => acc + it.billedAmount, 0),
+      totalPossibleOvercharge: updatedItems.reduce(
+        (acc, it) => acc + (it.possibleOvercharge ?? 0),
+        0
+      ),
+      benchmarkCeiling: updatedItems.reduce(
+        (acc, it) => acc + (it.benchmarkAmount ?? 0),
+        0
+      ),
+    });
+  };
+
+  const summaryData = {
+    id: auditData.id,
+    providerName: auditData.providerName,
+    invoiceNumber: auditData.invoiceNumber,
+    date: auditData.date,
+    totalBilled,
+    totalPossibleOvercharge,
+    benchmarkCeiling,
+    status: auditData.status,
+    categories: auditData.categories,
+  };
+
   return (
-    <div className="space-y-8">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-6">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Medical Bill Audit
-          </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Audit itemized charges to identify possible overcharges.
-          </p>
+    <div className="flex flex-col gap-6 sm:gap-8 pb-10">
+      {/* Top Controls / Simulation Switch */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-[#e5e1dc] shadow-2xs">
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="text-xs font-bold text-[#4b5563] hover:text-[#171c21] flex items-center gap-1 focus-ring rounded"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              arrow_back
+            </span>
+            <span>New Bill</span>
+          </Link>
+          <span className="text-[#dee3e9]">|</span>
+          <span className="text-xs font-semibold text-[#171c21]">
+            Active Audit Session: #{auditData.invoiceNumber}
+          </span>
         </div>
-        <div className="flex items-center gap-3">
-          <button className="px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors cursor-pointer">
-            Upload New Bill
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowProcessing(!showProcessing)}
+            className="px-3 py-1.5 rounded-lg bg-[#f0f4fb] hover:bg-[#eaeef5] border border-[#dee3e9] text-xs font-bold text-[#006398] flex items-center gap-1.5 transition-colors focus-ring"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {showProcessing ? "receipt_long" : "autorenew"}
+            </span>
+            <span>
+              {showProcessing ? "View Audit Report" : "Simulate Processing Engine"}
+            </span>
           </button>
         </div>
       </div>
 
-      {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">
-            Total Billed
-          </div>
-          <div className="text-2xl font-bold text-white mt-2">
-            ${totalBilled.toFixed(2)}
-          </div>
-        </div>
+      {/* Conditional Processing Engine View */}
+      {showProcessing ? (
+        <ProgressSteps
+          currentStep={2}
+          onComplete={() => setShowProcessing(false)}
+        />
+      ) : (
+        <>
+          {/* Main Audit Summary Card */}
+          <AuditSummaryCard
+            audit={summaryData}
+            onEditClick={() => {
+              const firstItem = items[0];
+              if (firstItem) handleEditClick(firstItem);
+            }}
+          />
 
-        <div className="p-5 rounded-xl bg-slate-900/60 border border-amber-500/30 bg-amber-500/5">
-          <div className="text-xs font-medium text-amber-400 uppercase tracking-wider">
-            Total Possible Overcharge
+          {/* Filter Bar & Search */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+            {/* Filter Pills */}
+            <div
+              className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0"
+              role="group"
+              aria-label="Filter line items by status"
+            >
+              <button
+                type="button"
+                onClick={() => setFilter("all")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all focus-ring shrink-0 ${
+                  filter === "all"
+                    ? "bg-[#171c21] text-white shadow-xs"
+                    : "bg-white hover:bg-[#f0f4fb] text-[#4b5563] border border-[#dee3e9]"
+                }`}
+              >
+                All Items ({items.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter("high")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all focus-ring shrink-0 flex items-center gap-1.5 ${
+                  filter === "high"
+                    ? "bg-[#bd0013] text-white shadow-xs"
+                    : "bg-white hover:bg-[#f0f4fb] text-[#4b5563] border border-[#dee3e9]"
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#bd0013]" />
+                High Flags ({items.filter((it) => it.status === "HIGH").length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter("duplicate")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all focus-ring shrink-0 flex items-center gap-1.5 ${
+                  filter === "duplicate"
+                    ? "bg-[#b26000] text-white shadow-xs"
+                    : "bg-white hover:bg-[#f0f4fb] text-[#4b5563] border border-[#dee3e9]"
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#b26000]" />
+                Duplicates ({items.filter((it) => it.status === "DUPLICATE").length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter("review")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all focus-ring shrink-0 flex items-center gap-1.5 ${
+                  filter === "review"
+                    ? "bg-[#006398] text-white shadow-xs"
+                    : "bg-white hover:bg-[#f0f4fb] text-[#4b5563] border border-[#dee3e9]"
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#006398]" />
+                Needs Review ({items.filter((it) => it.status === "REVIEW").length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter("fair")}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all focus-ring shrink-0 flex items-center gap-1.5 ${
+                  filter === "fair"
+                    ? "bg-[#166534] text-white shadow-xs"
+                    : "bg-white hover:bg-[#f0f4fb] text-[#4b5563] border border-[#dee3e9]"
+                }`}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#166534]" />
+                Fair / OK ({items.filter((it) => it.status === "FAIR").length})
+              </button>
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full md:w-64">
+              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280] text-[18px]">
+                search
+              </span>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search line items..."
+                className="w-full pl-9 pr-3 py-1.5 bg-white border border-[#dee3e9] rounded-lg text-xs font-medium text-[#171c21] focus-ring"
+                aria-label="Filter line items by keyword"
+              />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-amber-300 mt-2">
-            ${totalPossibleOvercharge.toFixed(2)}
+
+          {/* Subtext info */}
+          <div className="flex items-center justify-between text-xs text-[#6b7280] px-1">
+            <span>Tap any line item row to inspect statutory source and dispute grounds</span>
+            <span className="hidden sm:inline">Calculations updated per latest Central Gazette</span>
           </div>
-        </div>
 
-        <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-          <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">
-            Audited Items
+          {/* Line Item Rows List */}
+          <div className="flex flex-col gap-3">
+            {filteredItems.length === 0 ? (
+              <div className="bg-white rounded-xl p-8 text-center border border-[#e5e1dc] text-[#6b7280] text-sm">
+                No items match your filter criteria.
+              </div>
+            ) : (
+              filteredItems.map((it, idx) => (
+                <LineItemRow
+                  key={it.id}
+                  item={it}
+                  defaultExpanded={idx === 0}
+                  onEditClick={handleEditClick}
+                />
+              ))
+            )}
           </div>
-          <div className="text-2xl font-bold text-white mt-2">
-            {sampleItems.length}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
 
-      {/* Audit Line Items Table */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 overflow-hidden shadow-sm">
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-          <h2 className="font-semibold text-white">Itemized Audit Results</h2>
-          <span className="text-xs text-slate-400">Provider: Metro General Hospital</span>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-300">
-            <thead className="bg-slate-950/60 text-xs text-slate-400 uppercase font-medium">
-              <tr>
-                <th className="px-6 py-3">Code</th>
-                <th className="px-6 py-3">Description</th>
-                <th className="px-6 py-3 text-right">Billed</th>
-                <th className="px-6 py-3 text-right">Benchmark</th>
-                <th className="px-6 py-3 text-right">Possible Overcharge</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-800">
-              {sampleItems.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
-                  <td className="px-6 py-4 font-mono text-xs text-blue-400">{item.cptCode}</td>
-                  <td className="px-6 py-4">
-                    <div className="font-medium text-white">{item.description}</div>
-                    <div className="text-xs text-slate-400 mt-0.5">{item.explanation}</div>
-                  </td>
-                  <td className="px-6 py-4 text-right font-mono text-slate-200">
-                    ${item.billedAmount.toFixed(2)}
-                  </td>
-                  <td className="px-6 py-4 text-right font-mono text-slate-400">
-                    ${item.benchmarkAmount.toFixed(2)}
-                  </td>
-                  <td className="px-6 py-4 text-right font-mono font-medium">
-                    {item.possibleOvercharge > 0 ? (
-                      <span className="text-amber-400">
-                        +${item.possibleOvercharge.toFixed(2)}
-                      </span>
-                    ) : (
-                      <span className="text-emerald-400">$0.00</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Privacy Notice and Legal Disclaimer */}
-      <div className="p-4 rounded-lg bg-slate-900/40 border border-slate-800 text-xs text-slate-400 space-y-2">
-        <p>
-          <strong className="text-slate-300">Privacy Notice:</strong> FairBill does not store uploaded bill files or raw bill text. All files are processed in ephemeral memory.
-        </p>
-        <p>
-          <strong className="text-slate-300">Disclaimer:</strong> All findings reflect possible overcharges based on regional benchmark pricing data and do not constitute legal advice or allegations of improper conduct.
-        </p>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-4">
-        <Link
-          href="/dashboard"
-          className="px-4 py-2 text-sm rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium transition-colors"
-        >
-          Return to Dashboard
-        </Link>
-      </div>
+      {/* Edit Line Item Modal */}
+      <EditItemModal
+        isOpen={isModalOpen}
+        item={editingItem}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveItem}
+      />
     </div>
   );
 }

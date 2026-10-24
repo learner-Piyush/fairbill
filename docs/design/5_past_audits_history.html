@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FairBill - Medical Bill Audit &amp; Dispute Protection</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#bd0013", "on-primary": "#ffffff", "surface-container-low": "#f0f4fb", "on-primary-fixed-variant": "#93000c", "on-tertiary-fixed": "#2f1500", "tertiary-fixed-dim": "#ffb77d", "error": "#ba1a1a", "outline": "#936e6a", "error-container": "#ffdad6", "surface-container": "#eaeef5", "on-primary-fixed": "#410002", "on-surface-variant": "#5e3f3c", "surface-variant": "#dee3e9", "on-surface": "#171c21", "primary-container": "#e81721", "surface-tint": "#c00014", "outline-variant": "#e8bcb7", "surface": "#f7f9ff", "on-secondary-fixed-variant": "#004b73", "tertiary-container": "#b26000", "on-error": "#ffffff", "on-tertiary-container": "#fffdff", "on-tertiary-fixed-variant": "#6e3900", "surface-dim": "#d6dae1", "surface-bright": "#f7f9ff", "inverse-on-surface": "#edf1f8", "on-error-container": "#93000a", "surface-container-high": "#e4e8ef", "surface-container-highest": "#dee3e9", "on-secondary-fixed": "#001d31", "surface-container-lowest": "#ffffff", "primary-fixed-dim": "#ffb4ab", "tertiary": "#8e4b00", "on-secondary-container": "#00476e", "on-primary-container": "#fffdff", "on-secondary": "#ffffff", "secondary-fixed": "#cce5ff", "tertiary-fixed": "#ffdcc3", "background": "#f7f9ff", "inverse-surface": "#2c3136", "secondary-container": "#5bb8fe", "inverse-primary": "#ffb4ab", "secondary-fixed-dim": "#93ccff", "on-background": "#171c21", "on-tertiary": "#ffffff", "primary-fixed": "#ffdad6", "secondary": "#006398" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xs": "0.25rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "auto", "gutter-desktop": "2rem", "margin": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "headline-sm": ["Barlow Condensed"], "headline-md": ["Barlow Condensed"], "label-sm": ["Inter"], "label-md": ["Inter"], "body-lg": ["Inter"], "headline-xl-mobile": ["Barlow Condensed"], "headline-xl": ["Barlow Condensed"], "headline-lg": ["Barlow Condensed"], "currency-display": ["Barlow Condensed"], "headline-lg-mobile": ["Barlow Condensed"], "label-lg": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "22px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["22px", { "lineHeight": "26px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-xl-mobile": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-xl": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["30px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "currency-display": ["36px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg-mobile": ["24px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "700" }], "label-lg": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter md:px-gutter-tablet lg:px-gutter-desktop max-w-[1280px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm shrink-0"><img alt="FairBill Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XlYXQA9mdWIx6YXxnp602z5qWhT05lSlM-fc2s-rkT54Ir0e7TsTOkKhl0NDCSakIzSeT2ectD4qxJWLADObBwbU4A-GHpdw2-x1XB1vPkVwlRD6FsHS5DJArtcGaUl4R0p5uQZBewJKlbtvwc0_YJlH-Nl2tAhLnt0K3DtnHDSPnDcW0mcqK5mn0zlnFi1pzfIluhKcKbUGrYILQYKL2IK5qRYTQedD3xe8LcszhP2msnw6bNKGK1X0c"/><span class="font-headline-md text-headline-md tracking-tight uppercase text-on-surface">FairBill</span></div><nav class="hidden md:flex items-center gap-space-xs p-space-xs" data-active-classes="bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md"><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="new-audit" href="#">New Audit</a><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="audit-report" href="#">Audit Report</a><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dispute-pack" href="#">Dispute Pack</a><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md" data-path="past-audits" href="#">Past Audits</a></nav><div class="flex items-center gap-space-sm shrink-0"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded-full text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span><span class="font-label-sm text-label-sm tracking-wide uppercase">NPPA &amp; CGHS Reference Rates Updated</span></div><a class="hidden sm:flex items-center gap-1.5 px-space-md py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-full transition-colors" href="tel:1800FAIRBILL"><span class="material-symbols-outlined text-primary text-[16px]">call</span><span class="font-label-sm text-label-sm tracking-wide uppercase">1800-FAIR-BILL</span></a><button aria-label="Toggle Light and Dark Mode Preview" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="w-full max-w-[960px] mx-auto px-gutter md:px-gutter-tablet py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Header Section with Vertical Decal & Vault Badge -->
+<section class="relative w-full mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="w-1.5 h-4 bg-primary rounded-full"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Archived Adjudications</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight uppercase">Your Audit Vault</h1>
+</div>
+<!-- Security / Ephemeral Assurance Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container-high rounded-full shadow-sm text-on-surface self-start md:self-auto">
+<span class="material-symbols-outlined text-secondary text-[18px]">lock</span>
+<span class="font-label-sm text-label-sm tracking-wide text-on-surface">Local encrypted session storage • 0 cloud footprint</span>
+</div>
+</div>
+</section>
+<!-- Visual Analytics & Impact Summary Row -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-space-md mb-space-xl">
+<!-- Metric 1: Count & Verification Velocity -->
+<div class="md:col-span-3 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Bills Analyzed</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">receipt_long</span>
+</div>
+<div class="mt-space-md">
+<div class="font-headline-xl text-headline-xl text-on-surface leading-none">3</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-[14px]">verified</span>
+<span>100% Parsed against NPPA/CGHS</span>
+</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-full"></div>
+</div>
+</div>
+<!-- Metric 2: Total Discrepancies Surfaced (Primary Emphasis) -->
+<div class="md:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Overcharges Identified</span>
+<span class="px-space-xs py-0.5 bg-error-container text-on-error-container font-label-sm text-label-sm rounded">High Discrepancy</span>
+</div>
+<div class="my-space-md z-10">
+<div class="font-currency-display text-currency-display text-primary tracking-tight">₹78,420</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Average discrepancy: 34.6% per parsed hospital bill</div>
+</div>
+<div class="z-10 flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Regulatory Benchmark:</span>
+<span class="font-label-sm text-label-sm text-primary">NPPA Gazette &amp; Jan Aushadhi</span>
+</div>
+<!-- Subtle Decorative SVG Background Metric -->
+<svg class="absolute -right-4 -bottom-6 w-36 h-36 text-primary/5 pointer-events-none" fill="currentColor" viewbox="0 0 100 100">
+<path d="M50 0 L95 25 L95 75 L50 100 L5 75 L5 25 Z"></path>
+</svg>
+</div>
+<!-- Metric 3: Real Recovery / Waived Value -->
+<div class="md:col-span-4 bg-surface-container-high p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Waived &amp; Recovered</span>
+<div class="w-7 h-7 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[16px]">price_check</span>
+</div>
+</div>
+<div class="my-space-md">
+<div class="font-currency-display text-currency-display text-on-surface tracking-tight">₹54,100</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="text-secondary font-label-md text-label-md">68.9%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">settlement success rate</span>
+</div>
+</div>
+<!-- Resolution Ratio Mini Bar -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-1">
+<span>Settled: ₹54.1k</span>
+<span>Pending: ₹24.3k</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary rounded-l-full w-[69%]"></div>
+<div class="h-full bg-primary-container rounded-r-full w-[31%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Filter Control Bar -->
+<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-lg">
+<div class="flex flex-col lg:flex-row gap-space-md items-stretch lg:items-center justify-between">
+<!-- Search Input Container -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary transition-all" id="vault-search" placeholder="Search by hospital name, patient name, or invoice number..." type="text"/>
+</div>
+<!-- Segmented Status Toggles -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0" id="filter-container">
+<button class="filter-btn active px-space-md py-2 rounded-lg font-label-md text-label-md bg-inverse-surface text-inverse-on-surface shadow-sm shrink-0 transition-colors" data-filter="all" type="button">
+          All (3)
+        </button>
+<button class="filter-btn px-space-md py-2 rounded-lg font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface shrink-0 transition-colors" data-filter="disputed" type="button">
+          Disputed (1)
+        </button>
+<button class="filter-btn px-space-md py-2 rounded-lg font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface shrink-0 transition-colors" data-filter="settled" type="button">
+          Settled (1)
+        </button>
+<button class="filter-btn px-space-md py-2 rounded-lg font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface shrink-0 transition-colors" data-filter="pending" type="button">
+          Pending (1)
+        </button>
+</div>
+</div>
+</section>
+<!-- Audit Cards List Container -->
+<section class="flex flex-col gap-space-md mb-space-xl" id="cards-list">
+<!-- CARD 1: Active Dispute Ready (High Flag, Priority Attention) -->
+<article class="audit-card group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all duration-200" data-hospital="apollo multispeciality new delhi" data-invoice="del-ipd-90412" data-status="disputed pending">
+<!-- Clinical Diagnostic Indicator Strip (Thick Left Accent) -->
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-2 bg-primary"></div>
+<div class="p-space-lg flex-1">
+<!-- Card Top Meta Header -->
+<div class="flex flex-wrap items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-space-xs py-0.5 bg-error-container text-on-error-container rounded font-label-sm text-label-sm uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  HIGH FLAG RED
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">INV-APO-88219</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1 group-hover:text-primary transition-colors">Apollo Multispeciality, New Delhi</h3>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 bg-surface-container-high rounded-full font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                Action Required
+              </span>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Today, 14 Nov 2024 • IPD Discharge (3 pages)</div>
+</div>
+</div>
+<!-- Financial Breakdown Block -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md p-space-md bg-surface-container-low rounded-lg my-space-md">
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Total Billed</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹1,48,250</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-primary">Flagged Overcharge</div>
+<div class="font-headline-sm text-headline-sm text-primary mt-0.5 flex items-center gap-1">
+<span>₹41,850</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 bg-error-container text-on-error-container rounded font-bold">28.2%</span>
+</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Recommended Fair Cap</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹1,06,400</div>
+</div>
+</div>
+<!-- Current Resolution Status Banner -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm mb-space-md pb-space-sm bg-surface-container px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment_turned_in</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Dispute Pack Generated • Ready to submit to Hospital Grievance Cell</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Consumer Protection Act, 2019 Format</span>
+</div>
+<!-- Action Drawer -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="px-space-md py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:bg-primary-container transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Open Dispute Pack</span>
+</button>
+<button class="px-space-md py-2.5 bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-label-md rounded transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">find_in_page</span>
+<span>View Report</span>
+</button>
+</div>
+<button class="px-space-sm py-2 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Re-run Audit</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 2: Settled with Verified Hospital Waiver -->
+<article class="audit-card group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all duration-200" data-hospital="fortis memorial research institute gurugram" data-invoice="fmri-icu-1092" data-status="settled">
+<div class="flex flex-col md:flex-row">
+<!-- Settled Secondary Teal/Blue Strip -->
+<div class="w-full md:w-2 bg-secondary"></div>
+<div class="p-space-lg flex-1">
+<!-- Card Top Meta Header -->
+<div class="flex flex-wrap items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-space-xs py-0.5 bg-surface-container-high text-secondary rounded font-label-sm text-label-sm uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">task_alt</span>
+                  RESOLVED CASE
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">INV-FMRI-9941</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1 group-hover:text-secondary transition-colors">Fortis Memorial Research Institute, Gurugram</h3>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 bg-surface-container rounded-full font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                Settlement Confirmed
+              </span>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">28 Oct 2024 • ICU Multi-day summary</div>
+</div>
+</div>
+<!-- Financial Breakdown Block -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md p-space-md bg-surface-container-low rounded-lg my-space-md">
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Total Billed</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹3,12,000</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-primary">Audited Discrepancy</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹29,650</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-bold">Successfully Waived</div>
+<div class="font-headline-sm text-headline-sm text-secondary font-bold mt-0.5">₹24,000</div>
+</div>
+</div>
+<!-- Success Notification Banner -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm mb-space-md pb-space-sm bg-secondary-fixed/30 px-space-md py-space-sm rounded-lg text-on-secondary-fixed-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<span class="font-body-sm text-body-sm font-semibold">Hospital Waived ₹24,000 after formal written representation</span>
+</div>
+<span class="font-label-sm text-label-sm">Resolution Time: 48 Hours</span>
+</div>
+<!-- Actions Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="px-space-md py-2.5 bg-inverse-surface text-inverse-on-surface hover:bg-on-surface font-label-md text-label-md rounded shadow-sm transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+<span>Receipt of Waiver</span>
+</button>
+<button class="px-space-md py-2.5 bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-label-md rounded transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+<span>View Archived Pack</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history_edu</span>
+<span>Signed by Admin Superintendant</span>
+</span>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 3: Pharmacy Outpatient Jan Aushadhi Swap -->
+<article class="audit-card group bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all duration-200" data-hospital="max smart super speciality saket" data-invoice="msss-opd-pharm-411" data-status="settled pending">
+<div class="flex flex-col md:flex-row">
+<div class="w-full md:w-2 bg-tertiary-container"></div>
+<div class="p-space-lg flex-1">
+<!-- Card Top Meta Header -->
+<div class="flex flex-wrap items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-space-xs py-0.5 bg-error-container text-on-error-container rounded font-label-sm text-label-sm uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">medication</span>
+                  PHARMA INFLATION
+                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">RX-MAX-4890</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1 group-hover:text-tertiary transition-colors">Max Smart Super Speciality, Saket</h3>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 bg-surface-container-high rounded-full font-label-sm text-label-sm text-on-surface">
+                Generic Substitution
+              </span>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">12 Sep 2024 • Pharmacy Outpatient Receipt</div>
+</div>
+</div>
+<!-- Financial Breakdown Block -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md p-space-md bg-surface-container-low rounded-lg my-space-md">
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Total Billed</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹8,450</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-primary">Flagged Overcharge</div>
+<div class="font-headline-sm text-headline-sm text-primary mt-0.5">₹6,920</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Generic Cost Cap</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-0.5">₹1,530</div>
+</div>
+</div>
+<!-- Substitution Notification -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm mb-space-md pb-space-sm bg-surface-container px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">swap_horizontal_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Replaced with Jan Aushadhi generic alternative (81.8% savings)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PMBJP Reference List</span>
+</div>
+<!-- Actions -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<button class="px-space-md py-2.5 bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-md text-label-md rounded transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">find_in_page</span>
+<span>View Report</span>
+</button>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+              Status: Prescription re-dispensed at nearby PMBJP kiosk
+            </span>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Empty State Placeholder (hidden by default) -->
+<div class="hidden flex-col items-center justify-center p-space-xl bg-surface-container-lowest rounded-xl text-center mb-space-xl" id="no-results">
+<span class="material-symbols-outlined text-on-surface-variant text-[48px] mb-2">folder_off</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">No Audits Found</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-sm">No hospital records matched your filter criteria or search keyword.</p>
+<button class="mt-space-md px-space-md py-2 bg-surface-container text-on-surface font-label-md text-label-md rounded" id="reset-filters" type="button">Clear Search &amp; Filters</button>
+</div>
+<!-- Educational Reassurance & Privacy Proof Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-space-md mb-space-xl">
+<div class="p-space-lg bg-surface-container-low rounded-xl flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Zero Data Retention Guarantee</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          Your scanned invoices and discharge summaries are parsed in real time in your client browser memory. When this session is closed, private health indices (PHI) are scrubbed permanently.
+        </p>
+</div>
+</div>
+<div class="p-space-lg bg-surface-container-low rounded-xl flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
+<span class="material-symbols-outlined text-[24px]">balance</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Legal Admissibility in India</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+          All FairBill dispute bundles adhere to Section 2(47) of the Consumer Protection Act, 2019 regarding unfair trade practices and overcharging beyond DPCO price caps.
+        </p>
+</div>
+</div>
+</section>
+<!-- Floating Sticky Action Button (Start New Audit) -->
+<div class="sticky bottom-6 z-40 self-center sm:self-end mt-space-md">
+<a class="flex items-center gap-2 px-space-lg py-3.5 bg-primary text-on-primary rounded-full shadow-lg hover:bg-primary-container active:scale-[0.98] transition-all" data-path="new-audit" href="#">
+<span class="material-symbols-outlined text-[22px]">add</span>
+<span class="font-label-lg text-label-lg tracking-wide uppercase">Start New Audit</span>
+</a>
+</div>
+<!-- Mandatory Legal Disclaimer Footer Note -->
+<div class="w-full mt-space-xl pt-space-md pb-space-sm text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      FairBill flags possible overcharges against public reference prices. It is not legal advice.
+    </p>
+</div>
+</div>
+<!-- Simple Filter and Search Micro-interaction Script -->
+<script>
+  (function() {
+    const searchInput = document.getElementById('vault-search');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.audit-card');
+    const noResults = document.getElementById('no-results');
+    const resetBtn = document.getElementById('reset-filters');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function applyFilterAndSearch() {
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const statuses = card.getAttribute('data-status') || '';
+        const hospital = (card.getAttribute('data-hospital') || '').toLowerCase();
+        const invoice = (card.getAttribute('data-invoice') || '').toLowerCase();
+
+        const matchesFilter = (currentFilter === 'all') || statuses.includes(currentFilter);
+        const matchesSearch = currentSearch === '' || hospital.includes(currentSearch) || invoice.includes(currentSearch);
+
+        if (matchesFilter && matchesSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        noResults.classList.add('flex');
+      } else {
+        noResults.classList.add('hidden');
+        noResults.classList.remove('flex');
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.trim().toLowerCase();
+        applyFilterAndSearch();
+      });
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-inverse-surface', 'text-inverse-on-surface', 'active');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-inverse-surface', 'text-inverse-on-surface', 'active');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+        currentFilter = btn.getAttribute('data-filter');
+        applyFilterAndSearch();
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        currentSearch = '';
+        const allBtn = document.querySelector('[data-filter="all"]');
+        if (allBtn) allBtn.click();
+      });
+    }
+  })();
+</script></div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(0,0,0,0.02)] mt-auto"><div class="max-w-[1280px] mx-auto px-gutter md:px-gutter-tablet lg:px-gutter-desktop py-space-lg flex flex-col items-center gap-space-md text-center"><div class="w-full max-w-2xl px-space-md py-space-sm bg-surface-container rounded-lg"><p class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-label-sm text-label-sm uppercase tracking-wide text-error mr-1">Notice:</span>FairBill flags possible overcharges against public reference prices (NPPA, Jan Aushadhi, CGHS, State Clinical Establishment rate caps). It is not legal advice.</p></div><nav class="flex flex-wrap items-center justify-center gap-x-space-lg gap-y-space-xs"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="methodology-and-data-sources" href="#">Methodology &amp; Data Sources</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="patient-rights-in-india" href="#">Patient Rights in India</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="consumer-protection-act-guide" href="#">Consumer Protection Act (CCPA) Guide</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="privacy-policy" href="#">Privacy Policy (100% Ephemeral Processing)</a></nav><div class="font-label-sm text-label-sm text-on-surface-variant">© 2024 FairBill Health Technologies. Rigorous Medical Billing Adjudication.</div></div></footer></body></html>

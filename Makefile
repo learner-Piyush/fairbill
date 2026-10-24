@@ -20,6 +20,7 @@ check: check-web check-api
 check-web:
 	npm --prefix web run lint
 	npm --prefix web run tsc
+	npm --prefix web run test
 	npm --prefix web run build
 
 check-api:

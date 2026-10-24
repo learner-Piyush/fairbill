@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FairBill - Medical Bill Audit &amp; Dispute Protection</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#bd0013", "on-primary": "#ffffff", "surface-container-low": "#f0f4fb", "on-primary-fixed-variant": "#93000c", "on-tertiary-fixed": "#2f1500", "tertiary-fixed-dim": "#ffb77d", "error": "#ba1a1a", "outline": "#936e6a", "error-container": "#ffdad6", "surface-container": "#eaeef5", "on-primary-fixed": "#410002", "on-surface-variant": "#5e3f3c", "surface-variant": "#dee3e9", "on-surface": "#171c21", "primary-container": "#e81721", "surface-tint": "#c00014", "outline-variant": "#e8bcb7", "surface": "#f7f9ff", "on-secondary-fixed-variant": "#004b73", "tertiary-container": "#b26000", "on-error": "#ffffff", "on-tertiary-container": "#fffdff", "on-tertiary-fixed-variant": "#6e3900", "surface-dim": "#d6dae1", "surface-bright": "#f7f9ff", "inverse-on-surface": "#edf1f8", "on-error-container": "#93000a", "surface-container-high": "#e4e8ef", "surface-container-highest": "#dee3e9", "on-secondary-fixed": "#001d31", "surface-container-lowest": "#ffffff", "primary-fixed-dim": "#ffb4ab", "tertiary": "#8e4b00", "on-secondary-container": "#00476e", "on-primary-container": "#fffdff", "on-secondary": "#ffffff", "secondary-fixed": "#cce5ff", "tertiary-fixed": "#ffdcc3", "background": "#f7f9ff", "inverse-surface": "#2c3136", "secondary-container": "#5bb8fe", "inverse-primary": "#ffb4ab", "secondary-fixed-dim": "#93ccff", "on-background": "#171c21", "on-tertiary": "#ffffff", "primary-fixed": "#ffdad6", "secondary": "#006398" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xs": "0.25rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "auto", "gutter-desktop": "2rem", "margin": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "headline-sm": ["Barlow Condensed"], "headline-md": ["Barlow Condensed"], "label-sm": ["Inter"], "label-md": ["Inter"], "body-lg": ["Inter"], "headline-xl-mobile": ["Barlow Condensed"], "headline-xl": ["Barlow Condensed"], "headline-lg": ["Barlow Condensed"], "currency-display": ["Barlow Condensed"], "headline-lg-mobile": ["Barlow Condensed"], "label-lg": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "22px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["22px", { "lineHeight": "26px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-xl-mobile": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-xl": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg": ["30px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "currency-display": ["36px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg-mobile": ["24px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "700" }], "label-lg": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full px-gutter md:px-gutter-tablet lg:px-gutter-desktop max-w-[1280px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm shrink-0"><img alt="FairBill Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XlYXQA9mdWIx6YXxnp602z5qWhT05lSlM-fc2s-rkT54Ir0e7TsTOkKhl0NDCSakIzSeT2ectD4qxJWLADObBwbU4A-GHpdw2-x1XB1vPkVwlRD6FsHS5DJArtcGaUl4R0p5uQZBewJKlbtvwc0_YJlH-Nl2tAhLnt0K3DtnHDSPnDcW0mcqK5mn0zlnFi1pzfIluhKcKbUGrYILQYKL2IK5qRYTQedD3xe8LcszhP2msnw6bNKGK1X0c"/><span class="font-headline-md text-headline-md tracking-tight uppercase text-on-surface">FairBill</span></div><nav class="hidden md:flex items-center gap-space-xs p-space-xs" data-active-classes="bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md"><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md" data-path="new-audit" href="#">New Audit</a><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="audit-report" href="#">Audit Report</a><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dispute-pack" href="#">Dispute Pack</a><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="past-audits" href="#">Past Audits</a></nav><div class="flex items-center gap-space-sm shrink-0"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 bg-surface-container rounded-full text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span><span class="font-label-sm text-label-sm tracking-wide uppercase">NPPA &amp; CGHS Reference Rates Updated</span></div><a class="hidden sm:flex items-center gap-1.5 px-space-md py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-full transition-colors" href="tel:1800FAIRBILL"><span class="material-symbols-outlined text-primary text-[16px]">call</span><span class="font-label-sm text-label-sm tracking-wide uppercase">1800-FAIR-BILL</span></a><button aria-label="Toggle Light and Dark Mode Preview" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="w-full max-w-[960px] mx-auto px-gutter md:px-gutter-tablet py-space-lg"><div class="flex flex-col w-full">
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-space-lg pb-space-xl">
+<!-- Hero / Headline Unit -->
+<div class="flex flex-col gap-space-sm pt-space-sm text-left">
+<div class="inline-flex items-center gap-space-xs self-start px-space-sm py-1 bg-surface-container-high rounded-full shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Autonomous Medical Bill Adjudication</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight leading-none mt-1">
+        Stop Overpaying on <span class="text-primary-container">Hospital Bills</span> in India.
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant font-medium leading-relaxed">
+        Verify every medicine, PPE, stent, and bed charge against govt-mandated caps before you settle discharge payments.
+      </p>
+</div>
+<!-- Official Benchmarks Trust Ribbon -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex items-start sm:items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Statutory Price Ceilings Monitored</span>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">
+          Referenced against NPPA DPCO drug price caps, CGHS standard packages, and Jan Aushadhi generic equivalents.
+        </p>
+</div>
+</div>
+<!-- Main Diagnostic Audit Drop Area -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">document_scanner</span>
+<span class="font-label-lg text-label-lg text-on-surface uppercase tracking-wide">Document Ingestion</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Encrypted Pipeline</span>
+</div>
+<!-- Dropzone Interactive Card -->
+<div class="relative group cursor-pointer bg-surface-container-low hover:bg-surface-container rounded-lg p-space-lg flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[220px]" id="dropzone">
+<input accept=".pdf,image/png,image/jpeg,image/jpg" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" id="billFileInput" type="file"/>
+<div class="w-16 h-16 rounded-full bg-surface-container-highest group-hover:bg-surface-container-lowest group-hover:scale-105 flex items-center justify-center mb-space-sm transition-all shadow-sm">
+<span class="material-symbols-outlined text-primary-container text-[32px]">photo_camera</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface tracking-tight">
+          Upload hospital bill or pharmacy receipt
+        </p>
+<span class="font-label-md text-label-md text-on-surface-variant mt-1">
+          PDF, JPG, or high-res PNG (Up to 25MB)
+        </span>
+<div class="mt-space-md px-space-md py-1.5 bg-surface-container-highest rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">receipt_long</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Clear photos of paper discharge summaries or itemized bills work great.</span>
+</div>
+<!-- Dynamic Selected File Pill (hidden by default) -->
+<div class="hidden mt-space-md items-center gap-2 px-space-md py-space-xs bg-secondary-fixed text-on-secondary-fixed rounded-full shadow-sm z-20" id="selectedFileFeedback">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-sm text-label-sm font-semibold truncate max-w-xs" id="fileNameLabel">document.pdf</span>
+<button class="ml-1 hover:text-error flex items-center" id="clearFileBtn" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+<!-- Sample Bills Quick Injector -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> No bill on hand? Test instant scan benchmarks:
+        </span>
+<div class="flex flex-wrap gap-2">
+<button class="sample-btn px-space-md py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" data-sample="fortis" type="button">
+<span class="material-symbols-outlined text-[16px] text-error">emergency</span>
+            Fortis ICU Multi-day bill (₹2.4L)
+          </button>
+<button class="sample-btn px-space-md py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" data-sample="max" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">medication</span>
+            Max Healthcare pharmacy bill (₹48.2k)
+          </button>
+<button class="sample-btn px-space-md py-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-md text-label-md transition-colors flex items-center gap-1.5 active:scale-95" data-sample="apollo" type="button">
+<span class="material-symbols-outlined text-[16px] text-tertiary">medical_services</span>
+            Apollo surgical stent invoice (₹1.85L)
+          </button>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full min-h-[56px] py-space-md px-space-lg bg-primary-container hover:bg-primary text-on-primary font-headline-md text-headline-md rounded shadow-md hover:shadow-lg flex items-center justify-center gap-2 transition-all active:scale-[0.99] mt-space-xs" id="primaryAuditBtn" type="button">
+<span>Audit my bill now</span>
+<span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+</button>
+</div>
+<!-- Privacy & Statutory Non-retention Guarantee Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center shrink-0 text-on-surface">
+<span class="material-symbols-outlined text-[22px]">lock_reset</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">100% Ephemeral &amp; Private</span>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm uppercase rounded">Zero Retention</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Your bill is parsed strictly in-memory and permanently purged after audit calculation. We never harvest, log, or cross-reference sensitive identity tokens (ABHA ID, Aadhaar, insurance policy credentials, or phone numbers).
+        </p>
+</div>
+</div>
+<!-- Editorial Diagnostic Visual & Patient Quick Guide -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">Billing Pathology Breakdown</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Common Tactics Private Hospitals Use to Inflate Charges</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant self-start sm:self-auto">National Benchmark Audit 2024</span>
+</div>
+<!-- Comparison Metrics Graph Bar -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex justify-between items-center text-on-surface">
+<span class="font-label-md text-label-md">Average Unjustified Markup Identified Across 14,000+ Invoices</span>
+<span class="font-headline-md text-headline-md text-error">+28.4%</span>
+</div>
+<!-- Visual Segmented Bar -->
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-error" style="width: 44%" title="Pharmacy &amp; Consumables"></div>
+<div class="h-full bg-tertiary-container" style="width: 32%" title="Unbundled Nursing / PPE"></div>
+<div class="h-full bg-secondary" style="width: 24%" title="Procedure Markups"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-label-sm text-label-sm pt-1 gap-2">
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-error"></span>Consumables &amp; Injections (44%)</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span>Unbundled PPE/Nursing (32%)</span>
+<span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>Procedure Markups (24%)</span>
+</div>
+</div>
+<!-- Quick Guide 3-Point Diagnostic Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm mt-space-xs">
+<!-- Point 1 -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary">01</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">medication_liquid</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Branded vs Generic Margins</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              In-house pharmacies routinely dispense proprietary brands priced up to 800% higher than identical bio-equivalent DPCO or Jan Aushadhi salt formulations.
+            </p>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface font-semibold bg-surface-container px-2 py-1 rounded">
+            Governed by NPPA Formulations
+          </div>
+</div>
+<!-- Point 2 -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary">02</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">masks</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Unbundled Consumables</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Syringes, gloves, sanitizer, and standard surgical drapes are frequently line-itemed separately even though routine bed and OT packages are legally composite.
+            </p>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface font-semibold bg-surface-container px-2 py-1 rounded">
+            Violates CGHS Composite Rules
+          </div>
+</div>
+<!-- Point 3 -->
+<div class="bg-surface-container-low rounded-lg p-space-md flex flex-col justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary">03</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">monitor_heart</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Phantom Overhead Caps</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              High-tier room rents are weaponized to artificially scale doctor consultation fees, diagnostic lab tiers, and equipment handling rates in lockstep.
+            </p>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface font-semibold bg-surface-container px-2 py-1 rounded">
+            Subject to Supreme Court Precedent
+          </div>
+</div>
+</div>
+</div>
+<!-- Verification Sources Reference Footer -->
+<div class="py-space-md px-space-md bg-surface-container rounded-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-center sm:text-left">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">policy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          FairBill flags possible overcharges against public reference prices. It is not legal advice.
+        </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0 uppercase tracking-widest">v2.4 Live Reference DB</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const fileInput = document.getElementById('billFileInput');
+    const feedbackBox = document.getElementById('selectedFileFeedback');
+    const fileNameLabel = document.getElementById('fileNameLabel');
+    const clearFileBtn = document.getElementById('clearFileBtn');
+    const primaryBtn = document.getElementById('primaryAuditBtn');
+    const sampleBtns = document.querySelectorAll('.sample-btn');
+
+    if (fileInput) {
+      fileInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          showSelectedFile(file.name);
+        }
+      });
+    }
+
+    if (clearFileBtn) {
+      clearFileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        fileInput.value = '';
+        feedbackBox.classList.add('hidden');
+        feedbackBox.classList.remove('inline-flex');
+        primaryBtn.querySelector('span').innerText = 'Audit my bill now';
+      });
+    }
+
+    sampleBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const type = this.getAttribute('data-sample');
+        let mockName = 'Fortis_Memorial_ICU_Summary_Aug24.pdf';
+        if (type === 'max') mockName = 'Max_Saket_Pharmacy_Slip_7819.pdf';
+        if (type === 'apollo') mockName = 'Apollo_Cardiology_Implant_Bill.pdf';
+        showSelectedFile(mockName);
+      });
+    });
+
+    function showSelectedFile(name) {
+      fileNameLabel.innerText = name;
+      feedbackBox.classList.remove('hidden');
+      feedbackBox.classList.add('inline-flex');
+      primaryBtn.querySelector('span').innerText = 'Audit ' + name.substring(0, 24) + '...';
+    }
+
+    if (primaryBtn) {
+      primaryBtn.addEventListener('click', function() {
+        if (!fileInput.files.length && feedbackBox.classList.contains('hidden')) {
+          // Highlight upload zone if empty
+          const dropzone = document.getElementById('dropzone');
+          dropzone.classList.add('bg-error-container');
+          setTimeout(() => {
+            dropzone.classList.remove('bg-error-container');
+          }, 600);
+        } else {
+          primaryBtn.disabled = true;
+          primaryBtn.classList.add('opacity-80');
+          primaryBtn.querySelector('span').innerText = 'Auditing against NPPA & CGHS standards...';
+          setTimeout(() => {
+            const auditReportNav = document.querySelector('nav a[data-path="audit-report"]');
+            if (auditReportNav) {
+              auditReportNav.click();
+            } else {
+              window.location.hash = '#audit-report';
+            }
+          }, 1000);
+        }
+      });
+    }
+  })();
+</script></div></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(0,0,0,0.02)] mt-auto"><div class="max-w-[1280px] mx-auto px-gutter md:px-gutter-tablet lg:px-gutter-desktop py-space-lg flex flex-col items-center gap-space-md text-center"><div class="w-full max-w-2xl px-space-md py-space-sm bg-surface-container rounded-lg"><p class="font-body-sm text-body-sm text-on-surface-variant"><span class="font-label-sm text-label-sm uppercase tracking-wide text-error mr-1">Notice:</span>FairBill flags possible overcharges against public reference prices (NPPA, Jan Aushadhi, CGHS, State Clinical Establishment rate caps). It is not legal advice.</p></div><nav class="flex flex-wrap items-center justify-center gap-x-space-lg gap-y-space-xs"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="methodology-and-data-sources" href="#">Methodology &amp; Data Sources</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="patient-rights-in-india" href="#">Patient Rights in India</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="consumer-protection-act-guide" href="#">Consumer Protection Act (CCPA) Guide</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="privacy-policy" href="#">Privacy Policy (100% Ephemeral Processing)</a></nav><div class="font-label-sm text-label-sm text-on-surface-variant">© 2024 FairBill Health Technologies. Rigorous Medical Billing Adjudication.</div></div></footer></body></html>
