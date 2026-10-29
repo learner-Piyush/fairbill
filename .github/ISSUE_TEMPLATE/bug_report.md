@@ -1,0 +1,42 @@
+name: Bug Report
+description: Create a report to help us improve FairBill
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug in FairBill! Please ensure your report does not contain any sensitive medical bills or personal data.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Environment & Context
+      description: OS, Browser, Node/Python versions, or relevant configuration details.
+      placeholder: "e.g., Ubuntu 24.04, Python 3.12, Node 22, Chrome"
+    validations:
+      required: false
